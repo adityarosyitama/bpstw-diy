@@ -28,6 +28,10 @@ export default function RootLayout({
     <html lang="id">
       <head>
         {/* Favicon & Logo DIY */}
+        <meta
+          name="google-site-verification"
+          content="KQOW1tX3nVa1H6blSl9UKaY2RIUSZugTN-ebugd-XG8"
+        />
         <link
           rel="icon"
           href="https://upload.wikimedia.org/wikipedia/id/8/8e/Coat_of_arms_of_Yogyakarta.svg"
