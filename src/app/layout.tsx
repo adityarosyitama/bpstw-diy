@@ -9,7 +9,10 @@ export const metadata: Metadata = {
   keywords:
     "BPSTW, Balai Pelayanan Sosial Tresna Werdha, BPSTW Abiyoso, BPSTW Budi Luhur, Tresna Werdha Yogyakarta, panti werdha jogja, dinas sosial diy, lansia yogyakarta",
   authors: [{ name: "Dinas Sosial DIY" }],
-  robots: "index, follow",
+  robots: {
+    index: true,     // penting!
+    follow: true,    // penting!
+  },
   openGraph: {
     title: "BPSTW Abiyoso & Budi Luhur - Dinas Sosial DIY",
     description:
@@ -28,6 +31,8 @@ export default function RootLayout({
     <html lang="id">
       <head>
         {/* Favicon & Logo DIY */}
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
         <meta
           name="google-site-verification"
           content="KQOW1tX3nVa1H6blSl9UKaY2RIUSZugTN-ebugd-XG8"
