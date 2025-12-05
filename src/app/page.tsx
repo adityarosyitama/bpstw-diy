@@ -1,58 +1,60 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function Home() {
-  useEffect(() => {
-    // Langsung redirect ke situs resmi BPSTW DIY
-    window.location.replace(
-      "https://sites.google.com/view/bpstw-diy/halaman-muka"
-    );
-  }, []);
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-50">
-      <div className="text-center space-y-6">
-        {/* Logo DIY */}
+    <>
+      {/* Header SUPER KECIL – hanya di pojok kiri atas */}
+      <div className="fixed top-0 left-0 z-50 flex items-center gap-3 p-3 bg-white/90 backdrop-blur-sm shadow-sm">
         <Image
           src="https://upload.wikimedia.org/wikipedia/id/8/8e/Coat_of_arms_of_Yogyakarta.svg"
-          alt="Lambang Daerah Istimewa Yogyakarta"
-          width={120}
-          height={120}
-          className="mx-auto"
+          alt="Lambang DIY"
+          width={36}
+          height={36}
+          className="drop-shadow"
+          priority
         />
-
-        <h1 className="text-3xl font-bold text-gray-800">
-          Balai Pelayanan Sosial Tresna Werdha
-        </h1>
-        <h2 className="text-2xl text-gray-700">
-          BPSTW Abiyoso & Budi Luhur
-        </h2>
-        <p className="text-lg text-gray-600">
-          Dinas Sosial Daerah Istimewa Yogyakarta
-        </p>
-
-        <div className="mt-8">
-          <p className="text-gray-600">Mengalihkan ke situs resmi...</p>
-          <div className="mt-4">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          </div>
-        </div>
-
-        {/* Teks tambahan untuk crawler Google */}
-        <div className="mt-12 max-w-2xl text-sm text-gray-500 space-y-2 hidden">
-          <p>
-            BPSTW Abiyoso dan BPSTW Budi Luhur adalah unit pelaksana teknis
-            Dinas Sosial DIY yang memberikan layanan sosial bagi lanjut usia.
+        <div className="text-left">
+          <p className="text-xs font-semibold text-gray-800 leading-none">
+            BPSTW Abiyoso & Budi Luhur
           </p>
-          <p>
-            Kata kunci: BPSTW, Balai Pelayanan Sosial Tresna Werdha, BPSTW
-            Abiyoso, BPSTW Budi Luhur, panti werdha yogyakarta, tresna werdha
-            diy, lansia jogja.
+          <p className="text-[10px] text-gray-600 leading-none">
+            Dinas Sosial DIY
           </p>
         </div>
       </div>
-    </main>
+
+      {/* Loading indicator (muncul sebentar saat iframe load) */}
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-50 z-40 pointer-events-none">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
+          <p className="text-sm text-gray-600">Memuat situs resmi...</p>
+        </div>
+      </div>
+
+      {/* IFRAME FULL LAYAR 100% */}
+      <iframe
+        src="https://sites.google.com/view/bpstw-diy/halaman-muka"
+        className="fixed top-0 left-0 w-screen h-screen border-0"
+        allowFullScreen
+        loading="lazy"
+        title="Situs Resmi BPSTW DIY"
+        onLoad={() => {
+          // Hilangkan loading setelah iframe selesai load
+          const loading = document.querySelector(".fixed.inset-0.flex");
+          loading?.classList.add("opacity-0", "pointer-events-none");
+          setTimeout(() => loading?.remove(), 500);
+        }}
+      />
+
+      {/* SEO Helper – tetap terbaca Google */}
+      <div className="sr-only">
+        BPSTW Abiyoso, BPSTW Budi Luhur, Balai Pelayanan Sosial Tresna Werdha DIY,
+        Panti Werdha Yogyakarta, Lansia Jogja, Tresna Werdha Abiyoso, Tresna Werdha Budi Luhur,
+        Dinas Sosial Daerah Istimewa Yogyakarta
+      </div>
+    </>
   );
 }
