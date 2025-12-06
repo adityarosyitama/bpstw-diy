@@ -28,13 +28,13 @@ export default function RootLayout({
   return (
     <html lang="id">
       <head>
-        {/* ==== 1. METODE HTML TAG – PASTI LOLOS (paling atas) ==== */}
+        {/* 1. SATU-SATUNYA meta verifikasi yang boleh di atas script GTM */}
         <meta
           name="google-site-verification"
           content="e-VGsoeLajcHRG_6JGV9AQ8j7vVh9Y8C0-cUJ21YChc"
         />
 
-        {/* ==== 2. GOOGLE TAG MANAGER – POSISI SEMPURNA (kedua, tetap di paling atas) ==== */}
+        {/* 2. SCRIPT GTM HARUS LANGSUNG DI BAWAH META DI ATAS – TIDAK BOLEH ADA YANG LAIN DI ANTARANYA */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -47,16 +47,14 @@ export default function RootLayout({
           }}
         />
 
-        {/* Verifikasi lama (biarin aja, nggak ganggu) */}
+        {/* Semua meta dan link lainnya baru boleh di bawah ini */}
         <meta
           name="google-site-verification"
           content="KQOW1tX3nVa1H6blSl9UKaY2RIUSZugTN-ebugd-XG8"
         />
-
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
 
-        {/* Favicon */}
         <link
           rel="icon"
           href="https://upload.wikimedia.org/wikipedia/id/8/8e/Coat_of_arms_of_Yogyakarta.svg"
@@ -69,7 +67,7 @@ export default function RootLayout({
       </head>
 
       <body>
-        {/* ==== GOOGLE TAG MANAGER NOSCRIPT – HARUS ANAK PERTAMA DI BODY ==== */}
+        {/* Noscript harus tetap anak pertama di body */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5FDV67KT"
@@ -79,7 +77,6 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* Konten halaman kamu */}
         {children}
       </body>
     </html>
