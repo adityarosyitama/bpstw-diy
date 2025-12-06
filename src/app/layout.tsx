@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -9,10 +10,7 @@ export const metadata: Metadata = {
   keywords:
     "BPSTW, Balai Pelayanan Sosial Tresna Werdha, BPSTW Abiyoso, BPSTW Budi Luhur, Tresna Werdha Yogyakarta, panti werdha jogja, dinas sosial diy, lansia yogyakarta",
   authors: [{ name: "Dinas Sosial DIY" }],
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
   openGraph: {
     title: "BPSTW Abiyoso & Budi Luhur - Dinas Sosial DIY",
     description:
@@ -29,37 +27,34 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
+      {/* ────────────────────── GOOGLE TAG MANAGER – HARUS PALING ATAS ────────────────────── */}
       <head>
-        {/* === GOOGLE TAG MANAGER === */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+        {/* 1. Script GTM – anak pertama di <head> */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXX', { 'send_page_view': false });
-    `,
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-5FDV67KT');
+            `,
           }}
         />
 
-        {/* === VERIFIKASI GOOGLE SEARCH CONSOLE (2 metode) === */}
-        {/* Metode lama (masih aktif) */}
+        {/* Verifikasi Google (lama + baru) */}
         <meta
           name="google-site-verification"
           content="KQOW1tX3nVa1H6blSl9UKaY2RIUSZugTN-ebugd-XG8"
         />
-        {/* Metode baru lewat GTM + TXT record */}
         <meta
           name="google-site-verification"
           content="e-VGsoeLajcHRG_6JGV9AQ8j7vVh9Y8C0-cUJ21YChc"
         />
 
-        {/* Robots & Googlebot */}
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
 
-        {/* Favicon & Logo DIY */}
         <link
           rel="icon"
           href="https://upload.wikimedia.org/wikipedia/id/8/8e/Coat_of_arms_of_Yogyakarta.svg"
@@ -72,7 +67,7 @@ export default function RootLayout({
       </head>
 
       <body>
-        {/* === GOOGLE TAG MANAGER NOSCRIPT === */}
+        {/* 2. Noscript GTM – anak paling pertama di <body> */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5FDV67KT"
@@ -82,6 +77,7 @@ export default function RootLayout({
           />
         </noscript>
 
+        {/* Semua konten halaman */}
         {children}
       </body>
     </html>
